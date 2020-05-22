@@ -1,0 +1,32 @@
+# Buildando e Rodando a Imagem
+docker build --tag nhoj-flask:0.0 .
+
+# Rodando o Container com a aplicação consolidada na Imagem
+docker run --name nhoj-flask-run -p:5000:5000 -d nhoj-flask:0.0
+
+# Rodando o Container com a aplicação sendo carregada a partir do diretório app (Desenvolvimento)
+docker run --name nhoj-flask-run -p:5000:5000 -w /flask -v /home/nhoj/docker/flask:/flask -d nhoj-flask:0.0
+
+# Opcoes de Variaveis de Ambiente que alteram o funcionamento do Container
+docker run --name nhoj-flask-run -p:5000:5000 -w /flask -e DB_INIT="True" -e DB_MIGRATE="True" -e DB_UPGRADE="True" -v /home/nhoj/docker/flask:/flask -d nhoj-flask:0.0
+-e DB_INIT="True" - Inicializa o DB - flask-sqlalchemy
+-e DB_MIGRATE="True" - Faz o Migrate do DB - flask-sqlalchemy
+-e DB_UPGRADE="True" - Faz o Upgrade do DB - flask-sqlalchemy
+
+# Removendo o container rodando a imagem buildada
+docker stop nhoj-flask-run
+docker rm nhoj-flask-run
+
+# Removendo a imagem buildada
+docker images
+docker image rm nhoj-flask:0.0
+
+# Verificando o LOG do container continuamente :(equivale tail -f)
+docker logs -f nhoj-flask-run
+
+# Acessando sessão de shel de um container em execucao
+docker exec -it nhoj-flask-run sh
+
+# Para uso do flask-sqlalchemy para controlar o mysql através do módulo PyMySQL, é necessário criar a base de dados no MySQL antes de rodar o Migrate
+mysql -h 192.168.254.13 -u root -p
+create database db

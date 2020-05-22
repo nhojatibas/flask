@@ -1,0 +1,12 @@
+#!/bin/sh
+
+env > _log.txt
+echo "DB_INIT.....: $DB_INIT"  >> _log.txt
+echo "DB_MIGRATE..: $DB_MIGRATE" >> _log.txt
+echo "DB_UPGRATE.,: $DB_UPGRADE" >> _log.txt
+
+if [ "$DB_INIT" = 'True' ]; then python3 run.py init; echo "INIT" >> log.txt; fi
+if [ "$DB_MIGRATE" = 'True' ]; then python3 run.py migrate; echo "MIGRATE" >> log.txt; fi
+if [ "$DB_UPGRADE" = 'True' ]; then python3 run.py upgrade; echo "UPGRADE" >> log.txt; fi
+ 
+python3 run.py
