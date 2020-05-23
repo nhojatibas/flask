@@ -9,6 +9,7 @@ docker run --name nhoj-flask-run -p:5000:5000 -w /flask -v /home/nhoj/docker/fla
 
 # Opcoes de Variaveis de Ambiente que alteram o funcionamento do Container
 docker run --name nhoj-flask-run -p:5000:5000 -w /flask -e DB_INIT="True" -e DB_MIGRATE="True" -e DB_UPGRADE="True" -v /home/nhoj/docker/flask:/flask -d nhoj-flask:0.0
+docker run --name nhoj-flask-run -p:5000:5000 -w /flask -v /home/nhoj/docker/flask:/flask -d nhoj-flask:0.0
 -e DB_INIT="True" - Inicializa o DB - flask-sqlalchemy
 -e DB_MIGRATE="True" - Faz o Migrate do DB - flask-sqlalchemy
 -e DB_UPGRADE="True" - Faz o Upgrade do DB - flask-sqlalchemy
