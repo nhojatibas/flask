@@ -18,10 +18,14 @@ def main():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
-    app.logger.warning('Form..: '+str(form))
+    app.logger.warning('Form...: '+str(dir(form)))
+    app.logger.warning('Form Erros..: '+str(form.errors.values())+"|"+str(form.errors.items()))
     if form.validate_on_submit():
         app.logger.warning('Username..: '+str(form.username.data))
         app.logger.warning('Senha.....: '+str(form.password.data))
+    else:
+        app.logger.warning('Erros.....: '+str(form.errors))
+
     return render_template('login.html',
                             form=form)
 
