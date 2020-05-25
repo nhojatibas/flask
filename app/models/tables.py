@@ -4,10 +4,10 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
-    name = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
+    username = db.Column(db.String(11), unique=True)
+    password = db.Column(db.String(20))
+    name = db.Column(db.String(40))
+    email = db.Column(db.String(25), unique=True)
 
     def __init__(self, username, password, name, email):
         self.username = username
@@ -37,7 +37,7 @@ class Post(db.Model):
 class Follow(db.Model):
     __tablename__ = "follow"
 
-    id = db.Column(db.Interger, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
